@@ -1,7 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# ### Observation 1: Male dominate the purchasing of online games with over 85% of total players
+# ### Observation 2: Age 15-29 are the most active players, occupying more than 60% of total player population
+# ### Observation 3: Purchases seem to be fairly evenly distributed among players, with most of them purchase only 1-2 items (with 5 at most)
+# ### Observation 4: Even though female players are a much smaller group, they tend to spend more. On average they spend .40 more (10%) than their male counterpart.
+
+# In[1]:
 
 
 # import dependencies
@@ -9,7 +14,7 @@ import pandas as pd
 import numpy as np
 
 
-# In[3]:
+# In[2]:
 
 
 # import input dataset file
@@ -17,14 +22,14 @@ fname = 'Resources/purchase_data.csv'
 purchase_data = pd.read_csv(fname, encoding='utf8')
 
 
-# In[4]:
+# In[3]:
 
 
 ## Player Count - quick review of the dataframe
 purchase_data.head()
 
 
-# In[5]:
+# In[4]:
 
 
 # function to add $ sign and formatting to money
@@ -35,7 +40,7 @@ def as_currency(amount):
         return '-${:,.2f}'.format(-amount)
 
 
-# In[6]:
+# In[5]:
 
 
 # function to add 2 dicimal formatting to percentages
@@ -43,7 +48,7 @@ def as_percent(number):
     return '{:.2f}'.format(number)
 
 
-# In[7]:
+# In[6]:
 
 
 # list total players
@@ -52,7 +57,7 @@ summary_table = pd.DataFrame({'Total Players': [totalPlayers]})
 summary_table
 
 
-# In[9]:
+# In[7]:
 
 
 ## Purchasing Analysis (Total)
@@ -67,10 +72,10 @@ summary_table2 = pd.DataFrame({'Unique Items': [uniqueItems],
 summary_table2.head()                               
 
 
-# In[11]:
+# In[8]:
 
 
-## Gender Demographics
+## Gender Demographics - Observation 1: Male dominate the purchasing of online games with over 85% of total
 # this filters out all the duplicated SNs which return unique list of players with Gender
 df2 = purchase_data.loc[:, ['Gender','SN','Age']].drop_duplicates()
 
@@ -85,7 +90,7 @@ gender_summary_table = pd.DataFrame({'Total Count' : genderCount_s, '% of Player
 gender_summary_table
 
 
-# In[12]:
+# In[9]:
 
 
 ## Purchasing Analysis (Gender)
@@ -108,7 +113,7 @@ purchase_summary_table = pd.DataFrame(
 purchase_summary_table
 
 
-# In[19]:
+# In[10]:
 
 
 ## Age Demographics
@@ -133,7 +138,7 @@ age_summary_table = pd.DataFrame(
 age_summary_table
 
 
-# In[23]:
+# In[12]:
 
 
 ## Purchasing Analysis (Age)
@@ -143,8 +148,9 @@ purchase_data['Group'] = pd.cut(purchase_data['Age'], bins, labels=labels)
 gp3 = purchase_data.groupby('Group')
 
 agePurchaseCount = gp3['Purchase ID'].count()
-avgTotalPurchasePrice = gp3['Price'].sum()
+ageTotalPurchasePrice = gp3['Price'].sum()
 avgPurchasePrice = gp3['Price'].mean()
+
 avgTotalPerPerson = ageTotalPurchasePrice / ageCount
 
 age_summary_table2 = pd.DataFrame(
@@ -159,7 +165,7 @@ age_summary_table2 = pd.DataFrame(
 age_summary_table2
 
 
-# In[46]:
+# In[13]:
 
 
 ## Top Spenders
@@ -172,7 +178,7 @@ topTotal = top_spenders_gp['Price'].sum()
 topAvgPrice = topTotal / topPurchaseCount
 
 
-# In[66]:
+# In[14]:
 
 
 top_spending_df = pd.DataFrame(
@@ -189,7 +195,7 @@ top_spender_summary['Total Purchase Value'] = top_spender_summary['Total Purchas
 top_spender_summary.head()
 
 
-# In[74]:
+# In[15]:
 
 
 ## Most Popular Items
@@ -217,7 +223,7 @@ pop_item_summary1['Total Purchase Value'] = pop_item_summary1['Total Purchase Va
 pop_item_summary1.head()
 
 
-# In[75]:
+# In[16]:
 
 
 ## Most Profitable Items
@@ -228,8 +234,8 @@ pop_item_summary2['Total Purchase Value'] = pop_item_summary2['Total Purchase Va
 pop_item_summary2.head()
 
 
-# In[ ]:
+# In[17]:
 
 
-
+get_ipython().system('jupyter nbconvert --to python HeroesOfPymoli-Billy-Zhao.ipynb')
 
