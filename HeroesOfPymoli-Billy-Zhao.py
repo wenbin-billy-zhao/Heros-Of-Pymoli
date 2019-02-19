@@ -90,7 +90,7 @@ gender_summary_table = pd.DataFrame({'Total Count' : genderCount_s, '% of Player
 gender_summary_table
 
 
-# In[9]:
+# In[15]:
 
 
 ## Purchasing Analysis (Gender)
@@ -110,10 +110,12 @@ purchase_summary_table = pd.DataFrame(
         
     }
 )
+# purchase_summary_table = purchase_summary_table.rename_axis(None)
+purchase_summary_table.index.name = None
 purchase_summary_table
 
 
-# In[10]:
+# In[16]:
 
 
 ## Age Demographics
@@ -135,10 +137,12 @@ age_summary_table = pd.DataFrame(
         'percentage of Players' : agePctCount.apply(as_percent)
     }
 )
+# the following rename_axis(None) is to get rid of index title
+age_summary_table = age_summary_table.rename_axis(None)
 age_summary_table
 
 
-# In[12]:
+# In[11]:
 
 
 ## Purchasing Analysis (Age)
@@ -165,7 +169,7 @@ age_summary_table2 = pd.DataFrame(
 age_summary_table2
 
 
-# In[13]:
+# In[12]:
 
 
 ## Top Spenders
@@ -178,7 +182,7 @@ topTotal = top_spenders_gp['Price'].sum()
 topAvgPrice = topTotal / topPurchaseCount
 
 
-# In[14]:
+# In[13]:
 
 
 top_spending_df = pd.DataFrame(
@@ -195,7 +199,7 @@ top_spender_summary['Total Purchase Value'] = top_spender_summary['Total Purchas
 top_spender_summary.head()
 
 
-# In[15]:
+# In[14]:
 
 
 ## Most Popular Items
@@ -223,7 +227,7 @@ pop_item_summary1['Total Purchase Value'] = pop_item_summary1['Total Purchase Va
 pop_item_summary1.head()
 
 
-# In[16]:
+# In[15]:
 
 
 ## Most Profitable Items
@@ -234,7 +238,7 @@ pop_item_summary2['Total Purchase Value'] = pop_item_summary2['Total Purchase Va
 pop_item_summary2.head()
 
 
-# In[17]:
+# In[16]:
 
 
 get_ipython().system('jupyter nbconvert --to python HeroesOfPymoli-Billy-Zhao.ipynb')
